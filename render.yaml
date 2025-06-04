@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: mood-project
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn moodsite.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: moodsite.settings
+      - key: PYTHON_VERSION
+        value: 3.13.2
