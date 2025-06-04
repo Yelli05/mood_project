@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Random Food{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-center">🍽️ Random Food Picker for your mood</h1>
+<p class="lead text-center">Feeling hungry? Let’s help you decide!</p>
+
+<div class="card shadow-sm mx-auto p-4" style="max-width: 400px;">
+  <h2 class="text-primary">How about eating:</h2>
+  <h3 class="fw-bold display-5">{{ emoji }} {{ food }}</h3>
+  <a href="{% if mood %}{% url 'food_by_mood' mood.id %}{% else %}{% url 'food_home' %}{% endif %}" class="btn btn-success mt-3">🔄 Pick Again</a>
+
+</div>
+
+<hr class="my-5" />
+
+{% if not mood %}
+  <h2 class="mb-3">🍳 Add Your Own Food</h2>
+  <form method="post" class="mb-4">
+    {% csrf_token %}
+    <div class="input-group mb-2">
+      <input type="text" name="food" placeholder="Enter food name" class="form-control" required>
+      <input type="text" name="emoji" placeholder="Emoji (optional)" class="form-control">
+    </div>
+    <select name="mood" class="form-select mb-2">
+      <option value="">-- Select Mood (optional) --</option>
+      {% for mood_item in moods %}
+        <option value="{{ mood_item.id }}">{{ mood_item.name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-success">Add Food</button>
+  </form>
+{% endif %}
+
+<hr class="my-5" />
+
+<h3>All Available Foods</h3>
+{% if foods %}
+  <ul class="list-group mx-auto" style="max-width: 400px;">
+    {% for food_obj in foods %}
+      <li class="list-group-item">{{ food_obj.emoji }} {{ food_obj.name }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="text-muted">No foods added yet. Please add some above!</p>
+{% endif %}
+{% endblock %}
