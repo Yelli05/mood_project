@@ -7,7 +7,7 @@
 <p class="lead text-center">Feeling hungry? Let’s help you decide!</p>
 
 <div class="card shadow-sm mx-auto p-4" style="max-width: 400px;">
-  <h2 class="text-primary">How about eating:</h2>
+  <h2 class="text-primary">How about having:</h2>
   <h3 class="fw-bold display-5">{{ emoji }} {{ food }}</h3>
   <a href="{% if mood %}{% url 'food_by_mood' mood.id %}{% else %}{% url 'food_home' %}{% endif %}" class="btn btn-success mt-3">🔄 Pick Again</a>
 
