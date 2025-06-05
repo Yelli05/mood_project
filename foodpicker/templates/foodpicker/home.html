@@ -3,7 +3,11 @@
 {% block title %}Random Food{% endblock %}
 
 {% block content %}
-<h1 class="mb-4 text-center">🍽️ Random Food Picker for your mood</h1>
+{% if selected_mood %}
+  <h1 class="text-center mb-4">Random foodpicker for your ({{ selected_mood.name }}) mood</h1>
+{% else %}
+  <h1 class="text-center mb-4">Random foodpick from all foods</h1>
+{% endif %}
 <p class="lead text-center">Feeling hungry? Let’s help you decide!</p>
 
 <div class="card shadow-sm mx-auto p-4" style="max-width: 400px;">

@@ -3,11 +3,25 @@
 {% block title %}Moods{% endblock %}
 
 {% block content %}
-<p class="lead text-center">Can't find your mood? </p>
+<!-- Pick a Mood Section -->
+<h2 class="mb-4 text-center">Pick a Mood</h2>
+<p class="lead text-center">and get a food choice!!</p>
+
+<div class="d-flex flex-wrap justify-content-center gap-3">
+  {% for mood in moods %}
+    <a href="{% url 'food_by_mood' mood.id %}" class="btn btn-outline-primary rounded-pill px-4 py-2" style="font-size: 1.2rem;">
+      {{ mood.emoji }} {{ mood.name }}
+    </a>
+  {% endfor %}
+</div>
+
+<!-- Mood Form Section (moved below) -->
+<hr class="my-5">
+
+<p class="lead text-center">Can't find your mood?</p>
 <h1 class="mb-4 text-center">Add a new Mood</h1>
 
-<!-- Form to Add Mood -->
-<div class="card mb-4 shadow-sm">
+<div class="card mb-4 shadow-sm mx-auto" style="max-width: 500px;">
   <div class="card-body">
     <form method="post" action="{% url 'mood_home' %}">
       {% csrf_token %}
@@ -17,18 +31,9 @@
       <div class="mb-3">
         <input type="text" name="emoji" class="form-control" placeholder="Emoji (e.g. 😄)" required>
       </div>
-      <button type="submit" class="btn btn-primary">Add Mood</button>
+      <button type="submit" class="btn btn-primary w-100">Add Mood</button>
     </form>
   </div>
 </div>
-<!-- List of Existing Moods as Buttons -->
- <h2 class="mb-4 text-center">Pick a Mood</h2>
- <p class="lead text-center">and get a food choice!!</p>
-<div class="d-flex flex-wrap justify-content-center gap-3">
-  {% for mood in moods %}
-    <a href="{% url 'food_by_mood' mood.id %}" class="btn btn-outline-primary rounded-pill px-4 py-2" style="font-size: 1.2rem;">
-      {{ mood.emoji }} {{ mood.name }}
-    </a>
-  {% endfor %}
-</div>
+
 {% endblock %}

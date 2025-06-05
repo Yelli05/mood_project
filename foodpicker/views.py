@@ -51,12 +51,13 @@ def home_by_mood(request, mood_id):
         food_emoji = "😐"
 
     return render(request, "foodpicker/home.html", {
-        "foods": foods,
-        "food": food_name,
-        "emoji": food_emoji,
-        "mood": mood,
-        "moods": moods,  # pass moods here
-    })
+    "foods": foods,
+    "food": food_name,
+    "emoji": food_emoji,
+    "moods": moods,
+    "selected_mood": mood,  # ✅ key change
+})
+
 
 
 
